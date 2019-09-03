@@ -2,37 +2,46 @@ var express = require('express');
 var router = express.Router();
 var printer = require('node-native-printer');
 
-/* GET home page. */
-router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
-});
-
 /* GET List Printers. */
 router.get('/listPrinters', function(req, res, next) {
-  var list = printer.listPrinters();
-  console.log(list);
-  res.send(list);
+  printer.listPrinters().then(printers => {
+    console.log(printers);
+    res.send({
+      "printers": printers
+    });
+  });
 });
 
 /* GET Default Printer Name. */
 router.get('/defaultPrinterName', function(req, res, next) {
-  var defaultPrinterName = printer.defaultPrinterName();
-  console.log(defaultPrinterName);
-  res.send(defaultPrinterName);
+  printer.defaultPrinterName().then(defaultPrinterName => {
+    console.log(defaultPrinterName);
+    res.send(defaultPrinterName);
+  });
 });
 
 /* POST Set Printer */
-router.post('/setPrinter', function(req, res, next) {
-  printer.setPrinter(req.body.printerName);
+router.post('/setDefaultPrinter', function(req, res, next) {
   console.log(`Setting printer: ${req.body.printerName}`);
-  res.send(200);
+  printer.setPrinter(req.body.printerName).then(resp => {
+    res.send(200);
+  });
 });
 
 /* POST Print Text */
 router.post('/printText', function(req, res, next) {
-  printer.printText(req.body.text);
   console.log(`Printing text: ${req.body.text}`);
-  res.send(200);
+  printer.printText(req.body.text).then(resp => {
+    res.send(200);
+  });
+});
+
+/* POST Print Text From A Given Printer */
+router.post('/printTextFromPrinter', function(req, res, next) {
+  console.log(`Printing text: ${req.body.text} on printer ${req.body.printerName}`)
+  printer.printText(req.body.text, null, req.body.printerName).then(resp => {
+    res.send(200);
+  });
 });
 
 module.exports = router;
