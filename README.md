@@ -6,6 +6,16 @@
 
 ## Installation
 
+1) Install Node.JS 6.11.3 and NPM 3.10.10
+- Download the installer at the following link: https://nodejs.org/dist/v6.11.3/node-v6.11.3-x64.msi
+- Follow the installation instructions.
+
+2) Executer the server 
+- At the root directory of the project execute the command
+```
+   $ npm start
+```
+- If no errors are displayed the server will be listening at port 3000.
 
 ## Endpoints
 
