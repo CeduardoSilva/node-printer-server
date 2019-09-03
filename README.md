@@ -10,8 +10,12 @@
 - Download the installer at the following link: https://nodejs.org/dist/v6.11.3/node-v6.11.3-x64.msi
 - Follow the installation instructions.
 
-2) Executer the server 
-- At the root directory of the project execute the command
+2) Download the project from GitHub
+- Download the project at the following link: https://github.com/CeduardoSilva/node-printer-server/archive/master.zip 
+- Extract the project from the zip file.
+
+3) Executer the server 
+- At the root directory of the project execute the command.
 ```
    $ npm start
 ```
